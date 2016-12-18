@@ -1,0 +1,25 @@
+{
+  "name": "mof-parts-ujarakbtn",
+  "version": "0.0.2",
+  "description": "ujarak button of mofron UI parts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "mofron-parts-button" : "^0.0.4",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpart/mof-parts-ujarakbtn.git"
+  },
+  "keywords": [
+    "mofron"
+  ],
+  "author": "simpart",
+  "license": "SEE LICENSE IN LINK",
+  "bugs": {
+    "url": "https://github.com/simpart/mof-parts-ujarakbtn/issues"
+  },
+  "homepage": "https://github.com/simpart/mof-parts-ujarakbtn#readme"
+}

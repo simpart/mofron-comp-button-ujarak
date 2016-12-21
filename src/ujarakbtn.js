@@ -3,7 +3,6 @@
  * @brief  ujarak button class
  * @author simpart
  */
-require('mofron-parts-button');
 
 mofron.parts.UjarakBtn = class extends mofron.parts.Button {
     

@@ -1,13 +1,13 @@
 {
   "name": "mofron-parts-ujarakbtn",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "ujarak button of mofron UI parts",
-  "main": "index.js",
+  "main": "dist/ujarakbtn.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "mofron-parts-button" : "^0.0.5"
+    "mofron-parts-button": "^0.0.7"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,16 @@
   "keywords": [
     "mofron"
   ],
-  "author": "simpart",
+  "author": "simparts",
   "license": "SEE LICENSE IN LINK",
   "bugs": {
     "url": "https://github.com/simpart/mofron-parts-ujarakbtn/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-parts-ujarakbtn#readme"
+  "homepage": "https://github.com/simpart/mofron-parts-ujarakbtn#readme",
+  "devDependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
+    "webpack": "^1.14.0"
+  }
 }

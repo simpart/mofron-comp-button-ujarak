@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-ujarakbtn",
-  "version": "0.0.6",
+  "version": "0.5.0",
   "description": "ujarak button of mofron extends button component",
   "main": "dist/ujarakbtn.js",
   "scripts": {

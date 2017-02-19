@@ -1,12 +1,15 @@
 /**
- * @file   UjarakBtn.js
- * @brief  ujarak button class
+ * @file   mofron-comp-button-ujarak/index.js
  * @author simpart
  */
 require('mofron-comp-button');
 require('mofron-event-mouseover');
 require('mofron-event-mouseout');
 
+/**
+ * @class mofron.comp.button.Ujarak
+ * @brief ujarak button class
+ */
 mofron.comp.button.Ujarak = class extends mofron.comp.Button {
     
     /**
@@ -18,7 +21,7 @@ mofron.comp.button.Ujarak = class extends mofron.comp.Button {
     constructor (prm_opt) {
         try {
             super();
-            this.name('UjarakBtn');
+            this.name('Ujarak');
             
             this.m_color  = new mofron.Color(37,113,130);
             this.selector = 'ujarak-btn';
@@ -33,96 +36,97 @@ mofron.comp.button.Ujarak = class extends mofron.comp.Button {
     initDomConts(prm) {
         try {
             super.initDomConts(prm);
-            
-            if (false === mofron.comp.UjarakBtn_exec) {
-                this.addStyleTag();
-                mofron.comp.UjarakBtn_exec = true;
-            }
-            
+            this.initStyleTag();
             this.color(this.color(), true);
-            this.setTxtColor();
-            this.target().className(this.selector);
+            this.initTxtColor();
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    addStyleTag () {
+    initStyleTag () {
         try {
+            this.target().className(this.selector);
+            if (true === mofron.comp.button.Ujarak_exec) {
+                return;
+            }
+            mofron.comp.button.Ujarak_exec = true;
             var hc  = new mofron.HeadConts('style');
-            var set_conts = mofron.func.getStyleConts(
-                                '.' + this.selector,
-                                {
-                                    'display'    : 'block'    ,
-                                    'margin'     : '0px'      ,
-                                    'border'     : '1px solid',
-                                    'background' : 'none'     ,
-                                    'position'   : 'relative' ,
-                                    'z-index'    : '1'        ,
+            hc.contents(mofron.func.getStyleConts(
+                '.' + this.selector,
+                {
+                    'display'    : 'block'    ,
+                    'margin'     : '0px'      ,
+                    'border'     : '1px solid',
+                    'background' : 'none'     ,
+                    'position'   : 'relative' ,
+                    'z-index'    : '1'        ,
+                    
+                    '-webkit-backface-visibility' : 'hidden',
+                    '-moz-backface-visibility'    : 'hidden',
+                    'backface-visibility'         : 'hidden',
                                     
-                                    'webkit-backface-visibility' : 'hidden',
-                                    'moz-backface-visibility'    : 'hidden',
-                                    'backface-visibility'         : 'hidden',
-                                    
-                                    'webkit-transition' : 'border-color 0.4s, color 0.4s',
-                                    'moz-transition'    : 'border-color 0.4s, color 0.4s',
-                                    'o-transition'      : 'border-color 0.4s, color 0.4s',
-                                    'transition'         : 'border-color 0.4s, color 0.4s',
-                                    
-                                    '-webkit-transition-timing-function' : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                    '-moz-transition-timing-function'    : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                    '-o-transition-timing-function'      : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                    '-ms-transition-timing-function'     : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                    'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)'
-                                } 
-                            );
-           set_conts += mofron.func.getStyleConts(
-                           '.' + this.selector + ':focus',
-                           { 'outline' : 'none' }
-                       );
+                    '-webkit-transition' : 'border-color 0.4s, color 0.4s',
+                    '-moz-transition'    : 'border-color 0.4s, color 0.4s',
+                    '-o-transition'      : 'border-color 0.4s, color 0.4s',
+                    'transition'         : 'border-color 0.4s, color 0.4s',
+                    
+                    '-webkit-transition-timing-function' : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    '-moz-transition-timing-function'    : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    '-o-transition-timing-function'      : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    '-ms-transition-timing-function'     : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)'
+                }
+            ));
+            hc.pushTag();
             
-           set_conts += mofron.func.getStyleConts(
-                            '.' + this.selector + ':before',
-                            { 
-                                'content'     : "''"      ,
-                                'position'    : 'absolute',
-                                'top'         : '0'       ,
-                                'left'        : '0'       ,
-                                'width'       : '100%'    ,
-                                'height'      : '100%'    ,
-                                'background'  : this.color().getStyle() ,
-                                'z-index'     : '-1'      ,
-                                'opacity'     : '0'       ,
-                                
-                                '-webkit-transform'  : 'scale3d(0.7, 1, 1)',
-                                '-moz-transition'    : 'scale3d(0.7, 1, 1)',
-                                '-o-transition'      : 'scale3d(0.7, 1, 1)',
-                                'transform'          : 'scale3d(0.7, 1, 1)',
-                                '-webkit-transition' : '-webkit-transform 0.4s, opacity 0.4s',
-                                '-moz-transition'    : '-moz-transform 0.4s, opacity 0.4s'   ,
-                                '-o-transition'      : '-o-transform 0.4s, opacity 0.4s'     ,
-                                'transition'         : 'transform 0.4s, opacity 0.4s'        ,
-                                
-                                '-webkit-transition-timing-function' : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                '-moz-transition-timing-function'    : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                '-o-transition-timing-function'      : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                '-ms-transition-timing-function'     : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                                'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)'
-                            }
-                        );
+            hc.contents(mofron.func.getStyleConts(
+                '.' + this.selector + ':focus',
+                { 'outline' : 'none' }
+            ));
+            hc.pushTag();
             
-            set_conts += mofron.func.getStyleConts(
-                             '.' + this.selector + ':hover::before',
-                             {
-                                 'opacity'            : '1',
-                                 '-webkit-transform'  : 'translate3d(0, 0, 0)',
-                                 '-moz-transition'    : 'translate3d(0, 0, 0)',
-                                 '-o-transition'      : 'translate3d(0, 0, 0)',
-                                 'transform'          : 'translate3d(0, 0, 0)'
-                             }
-                         );
-            hc.contents(set_conts);
+            hc.contents(mofron.func.getStyleConts(
+                '.' + this.selector + ':before',
+                { 
+                    'content'     : "''"      ,
+                    'position'    : 'absolute',
+                    'top'         : '0'       ,
+                    'left'        : '0'       ,
+                    'width'       : '100%'    ,
+                    'height'      : '100%'    ,
+                    'z-index'     : '-1'      ,
+                    'opacity'     : '0'       ,
+                    
+                    '-webkit-transform'  : 'scale3d(0.7, 1, 1)',
+                    '-moz-transition'    : 'scale3d(0.7, 1, 1)',
+                    '-o-transition'      : 'scale3d(0.7, 1, 1)',
+                    'transform'          : 'scale3d(0.7, 1, 1)',
+                    '-webkit-transition' : '-webkit-transform 0.4s, opacity 0.4s',
+                    '-moz-transition'    : '-moz-transform 0.4s, opacity 0.4s'   ,
+                    '-o-transition'      : '-o-transform 0.4s, opacity 0.4s'     ,
+                    'transition'         : 'transform 0.4s, opacity 0.4s'        ,
+                                 
+                    '-webkit-transition-timing-function' : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    '-moz-transition-timing-function'    : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    '-o-transition-timing-function'      : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    '-ms-transition-timing-function'     : 'cubic-bezier(0.2, 1, 0.3, 1)',
+                    'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)'
+                }
+            ));
+            hc.pushTag();
+            
+            hc.contents(mofron.func.getStyleConts(
+                '.' + this.selector + ':hover::before',
+                {
+                    'opacity'            : '1',
+                    '-webkit-transform'  : 'translate3d(0, 0, 0)',
+                    '-moz-transition'    : 'translate3d(0, 0, 0)',
+                    '-o-transition'      : 'translate3d(0, 0, 0)',
+                    'transform'          : 'translate3d(0, 0, 0)'
+                }
+            ));
             hc.pushTag();
         } catch (e) {
             console.error(e.stack);
@@ -130,7 +134,7 @@ mofron.comp.button.Ujarak = class extends mofron.comp.Button {
         }
     }
     
-    setTxtColor () {
+    initTxtColor () {
         try {
             this.child()[0].color(
                 new mofron.Color(0,0,0)
@@ -244,5 +248,5 @@ mofron.comp.button.Ujarak = class extends mofron.comp.Button {
         }
     }
 }
-mofron.comp.UjarakBtn_exec = false;
+mofron.comp.button.Ujarak_exec = false;
 module.exports = mofron.comp.button.Ujarak;

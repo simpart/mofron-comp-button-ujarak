@@ -1,14 +1,18 @@
 {
-  "name": "mofron-comp-ujarakbtn",
-  "version": "0.5.0",
+  "name": "mofron-comp-button-ujarak",
+  "version": "0.0.4",
   "description": "ujarak button of mofron extends button component",
-  "main": "dist/ujarakbtn.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "mofron-event-mouseout": "",
+    "mofron-event-mouseover": ""
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simpart/mofron-comp-ujarakbtn.git"
+    "url": "git+https://github.com/simpart/mofron-comp-button-ujarak.git"
   },
   "keywords": [
     "mofron"
@@ -16,13 +20,9 @@
   "author": "simparts",
   "license": "SEE LICENSE IN LINK",
   "bugs": {
-    "url": "https://github.com/simpart/mofron-comp-ujarakbtn/issues"
+    "url": "https://github.com/simpart/mofron-comp-button-ujarak/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-comp-ujarakbtn#readme",
+  "homepage": "https://github.com/simpart/mofron-comp-button-ujarak#readme",
   "devDependencies": {
-    "babel-core": "^6.21.0",
-    "babel-loader": "^6.2.10",
-    "babel-preset-es2015": "^6.18.0",
-    "webpack": "^1.14.0"
   }
 }

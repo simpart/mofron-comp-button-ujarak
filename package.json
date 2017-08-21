@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-button-ujarak",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "ujarak button of mofron extends button component",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "url": "git+https://github.com/simpart/mofron-comp-button-ujarak.git"
   },
   "keywords": [
-    "mofron"
+    "front end"
   ],
   "author": "simparts",
   "license": "SEE LICENSE IN LINK",

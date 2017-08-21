@@ -38,7 +38,7 @@ mofron.comp.button.Ujarak = class extends Button {
             this.style({
                 'display'    : 'block'    ,
                 'margin'     : '0px'      ,
-                'border'     : '1px solid',
+                'border'     : '1px solid ' + this.color().getStyle(),
                 'background' : 'none'     ,
                 'position'   : 'relative' ,
                 'z-index'    : '1'        ,
@@ -59,7 +59,6 @@ mofron.comp.button.Ujarak = class extends Button {
                 'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)'
             });
             
-            this.color();
             this.initTxtColor();
         } catch (e) {
             console.error(e.stack);
@@ -192,11 +191,12 @@ mofron.comp.button.Ujarak = class extends Button {
                 contents : [ mf.func.getStyleConts(
                                  '#' + this.styleTgt().getId() + ':before',
                                  { 'background'  : this.color().getStyle() }
-                             ),
-                             mf.func.getStyleConts(
-                                 '#'+ this.styleTgt().getId() + ':hover',
-                                 { 'border-color' : this.color().getStyle() }
-                             ) ]
+                             )
+                             //mf.func.getStyleConts(
+                             //    '#'+ this.styleTgt().getId() + ':hover',
+                             //    { 'border-color' : this.color().getStyle() }
+                             //)
+                             ]
             });
         } catch (e) {
             console.error(e.stack);
@@ -206,16 +206,21 @@ mofron.comp.button.Ujarak = class extends Button {
     
     width (val) {
         try {
-            var _val = (val === undefined) ? null : val;
-            if (null === _val) {
-                return this.style('min-width');
+            if (undefined === val) {
+                /* getter */
+                return mf.func.getLength(this.style('min-width'));
             }
-            if ('number' === (typeof _val)) {
-                this.style('min-width', _val + 'px');
-                this.style('max-width', _val + 'px');
-            } else if ('string' === (typeof _val)) {
-                this.style('min-width', _val);
-                this.style('max-width', _val);
+            /* setter */
+            if ('number' === (typeof val)) {
+                this.style({
+                    'min-width' : val + 'px',
+                    'max-width' : val + 'px'
+                });
+            } else if ('string' === (typeof val)) {
+                this.style({
+                    'min-width' : val,
+                    'max-width' : val
+                });
             } else {
                 throw new Error('invalid parameter');
             }

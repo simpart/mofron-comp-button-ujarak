@@ -185,7 +185,7 @@ mofron.comp.button.Ujarak = class extends Button {
                 throw new Error('invalid parameter');
             }
             this.m_color = clr;
-            this.style({ 'border-color' : this.color().getStyle() });
+            this.style({ 'border' : '1px solid ' + this.color().getStyle() });
             mf.func.addHeadConts({
                 tag      : 'style',
                 contents : [ mf.func.getStyleConts(

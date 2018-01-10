@@ -17,5 +17,5 @@ let Button = require('mofron-comp-button-ujarak');
 new Button('Test Button').visible(true);
 ```
 
-#Class Specification
+# Class Specification
 please see [button component spacification](https://github.com/mofron/mofron-comp-button)

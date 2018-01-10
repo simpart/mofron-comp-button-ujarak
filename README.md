@@ -1,5 +1,5 @@
 # mofron-comp-ujarakbtn
-this is expansion button component for mofron.
+this is expansion button component for mofron.<br>
 please see [here](https://github.com/mofron/mofron) about an overview of mofron
 
 # Install

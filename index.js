@@ -191,12 +191,7 @@ mofron.comp.button.Ujarak = class extends Button {
                 contents : [ mf.func.getStyleConts(
                                  '#' + this.styleTgt().getId() + ':before',
                                  { 'background'  : this.color().getStyle() }
-                             )
-                             //mf.func.getStyleConts(
-                             //    '#'+ this.styleTgt().getId() + ':hover',
-                             //    { 'border-color' : this.color().getStyle() }
-                             //)
-                             ]
+                             )]
             });
         } catch (e) {
             console.error(e.stack);

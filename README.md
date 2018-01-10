@@ -10,11 +10,10 @@ npm install mofron-comp-ujarakbtn
 
 # Quick Start
 
-example
 ```javascript
 require('mofron');
-let Button = require('mofron-comp-button-ujarak');
-new Button('Test Button').visible(true);
+let Button = require('mofron-comp-ujarakbtn');
+new Button('Ujarak Button').visible(true);
 ```
 
 # Class Specification

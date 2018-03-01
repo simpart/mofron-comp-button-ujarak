@@ -11,7 +11,7 @@ let Mout   = require('mofron-event-mouseout');
  * @class mofron.comp.button.Ujarak
  * @brief ujarak button class
  */
-mofron.comp.button.Ujarak = class extends Button {
+mofron.comp.UjarakBtn = class extends Button {
     
     /**
      * initialize component
@@ -22,7 +22,7 @@ mofron.comp.button.Ujarak = class extends Button {
     constructor (prm_opt) {
         try {
             super();
-            this.name('Ujarak');
+            this.name('UjarakBtn');
             this.prmOpt(prm_opt);
         } catch (e) {
             console.error(e.stack);
@@ -70,10 +70,10 @@ mofron.comp.button.Ujarak = class extends Button {
         try {
             let selector = 'button-ujarak';
             this.target().className(selector);
-            if (true === mf.comp.button.Ujarak_init) {
+            if (true === mf.comp.UjarakBtn_init) {
                 return;
             }
-            mf.comp.button.Ujarak_init = true;
+            mf.comp.UjarakBtn_init = true;
             
             mf.func.addHeadConts({
                 tag      : 'style',
@@ -225,5 +225,5 @@ mofron.comp.button.Ujarak = class extends Button {
         }
     }
 }
-mofron.comp.button.Ujarak_init = false;
-module.exports = mofron.comp.button.Ujarak;
+mofron.comp.UjarakBtn_init = false;
+module.exports = mofron.comp.UjarakBtn;

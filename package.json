@@ -1,14 +1,17 @@
 {
   "name": "mofron-comp-ujarakbtn",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "expansion button component for mofron",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "mofron-event-mouseout": "",
-    "mofron-event-mouseover": ""
+    "mofron-comp-button" : "",
+    "mofron-event-hover" : "",
+    "mofron-effect-fade" : "",
+    "mofron-effect-scale" : "",
+    "mofron-effect-style" : ""
   },
   "repository": {
     "type": "git",

@@ -2,10 +2,12 @@
  * @file   mofron-comp-button-ujarak/index.js
  * @author simpart
  */
-let mf     = require('mofron');
-let Button = require('mofron-comp-button');
-let Mover  = require('mofron-event-mouseover');
-let Mout   = require('mofron-event-mouseout');
+const mf     = require('mofron');
+const Button = require('mofron-comp-button');
+const Hover  = require('mofron-event-hover');
+const Fade   = require('mofron-effect-fade');
+const Scale  = require('mofron-effect-scale');
+const Style  = require('mofron-effect-style');
 
 /**
  * @class mofron.comp.button.Ujarak
@@ -19,11 +21,11 @@ mofron.comp.UjarakBtn = class extends Button {
      * @param prm (string,option) : button contents
      * @param opt (array) : option
      */
-    constructor (prm_opt) {
+    constructor (po) {
         try {
             super();
             this.name('UjarakBtn');
-            this.prmOpt(prm_opt);
+            this.prmOpt(po);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -33,134 +35,27 @@ mofron.comp.UjarakBtn = class extends Button {
     initDomConts(prm) {
         try {
             super.initDomConts(prm);
-            this.initStyleTag();
-            
             this.style({
-                'display'    : 'block'    ,
-                'margin'     : '0px'      ,
-                'border'     : '1px solid ' + this.color().getStyle(),
-                'background' : 'none'     ,
-                'position'   : 'relative' ,
-                'z-index'    : '1'        ,
-                
-                '-webkit-backface-visibility' : 'hidden',
-                '-moz-backface-visibility'    : 'hidden',
-                'backface-visibility'         : 'hidden',
-                
-                '-webkit-transition' : 'border-color 0.4s, color 0.4s',
-                '-moz-transition'    : 'border-color 0.4s, color 0.4s',
-                '-o-transition'      : 'border-color 0.4s, color 0.4s',
-                'transition'         : 'border-color 0.4s, color 0.4s',
-                
-                '-webkit-transition-timing-function' : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                '-moz-transition-timing-function'    : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                '-o-transition-timing-function'      : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                '-ms-transition-timing-function'     : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)'
+                'background': 'none',        // disabled button style
+                'position'  : 'relative'
             });
+            this.child(this.band());
             
-            this.initTxtColor();
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    initStyleTag () {
-        try {
-            let selector = 'button-ujarak';
-            this.target().className(selector);
-            if (true === mf.comp.UjarakBtn_init) {
-                return;
+            let hvr_fnc = (cmp, flg) => {
+                try {
+                    cmp.execEffect((true === flg) ? 2 : 3);
+                    cmp.band().visible(flg);
+                } catch (e) {
+                    console.error(e.stack);
+                    throw e;
+                }
             }
-            mf.comp.UjarakBtn_init = true;
-            
-            mf.func.addHeadConts({
-                tag      : 'style',
-                contents : [
-                    mf.func.getStyleConts(
-                        '.' + selector + ':focus',
-                        { 'outline' : 'none' }
-                    ),
-                    mf.func.getStyleConts(
-                        '.' + selector + ':before',
-                        { 'content'     : "''"      ,
-                          'position'    : 'absolute',
-                          'top'         : '0'       ,
-                          'left'        : '0'       ,
-                          'width'       : '100%'    ,
-                          'height'      : '100%'    ,
-                          'z-index'     : '-1'      ,
-                          'opacity'     : '0'       ,
-                          
-                          '-webkit-transform'  : 'scale3d(0.7, 1, 1)',
-                          '-moz-transition'    : 'scale3d(0.7, 1, 1)',
-                          '-o-transition'      : 'scale3d(0.7, 1, 1)',
-                          'transform'          : 'scale3d(0.7, 1, 1)',
-                          '-webkit-transition' : '-webkit-transform 0.4s, opacity 0.4s',
-                          '-moz-transition'    : '-moz-transform 0.4s, opacity 0.4s'   ,
-                          '-o-transition'      : '-o-transform 0.4s, opacity 0.4s'     ,
-                          'transition'         : 'transform 0.4s, opacity 0.4s'        ,
-                          
-                          '-webkit-transition-timing-function' : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                          '-moz-transition-timing-function'    : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                          '-o-transition-timing-function'      : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                          '-ms-transition-timing-function'     : 'cubic-bezier(0.2, 1, 0.3, 1)',
-                          'transition-timing-function'         : 'cubic-bezier(0.2, 1, 0.3, 1)' }
-                    ),
-                    mf.func.getStyleConts(
-                        '.' + selector + ':hover::before',
-                        { 'opacity'            : '1',
-                          '-webkit-transform'  : 'translate3d(0, 0, 0)',
-                          '-moz-transition'    : 'translate3d(0, 0, 0)',
-                          '-o-transition'      : 'translate3d(0, 0, 0)',
-                          'transform'          : 'translate3d(0, 0, 0)' }
-                    )
-                ]
-            });
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    initTxtColor () {
-        try {
-            this.text().color(
-                new mf.Color(0,0,0)
-            );
-            
-            this.event([
-                new Mover(
-                    (btn) => {
-                        try {
-                            var rgb = btn.color().rgba();
-                            if (290 > (rgb[0]+rgb[1]+rgb[2])) {
-                                btn.child()[0].color(
-                                    new mf.Color(255,255,255)
-                                );
-                            }
-                        } catch (e) {
-                            console.error(e.stack);
-                            throw e;
-                        }
-                    },this
-                ),
-                new Mout(
-                    (btn) => {
-                        try {
-                            var rgb = btn.color().rgba();
-                            if (290 > (rgb[0]+rgb[1]+rgb[2])) {
-                                btn.child()[0].color(
-                                    new mf.Color(0,0,0)
-                                );
-                            }
-                        } catch (e) {
-                            console.error(e.stack);
-                            throw e;
-                        }
-                    }, this
-                )
+            this.event([ new Hover(hvr_fnc) ]);
+            this.effect([
+                new Style({
+                    speed: 150,
+                    style: [null, null, { 'background': 'none' }, { 'background': 'none' }]
+                })
             ]);
         } catch (e) {
             console.error(e.stack);
@@ -168,62 +63,54 @@ mofron.comp.UjarakBtn = class extends Button {
         }
     }
     
-    color (clr) {
+    band (prm) {
         try {
-            if (undefined === clr) {
-                /* getter */
-                if (undefined === this.m_color) {
-                    let thm_clr = this.theme().color();
-                    this.color(
-                        (null === thm_clr) ? new mf.Color(37,113,130) : thm_clr[0]
-                    );
-                }
-                return this.m_color;
+            if (undefined !== prm) {
+                prm.execOption({
+                    visible: false, size: ['100%', '100%'],
+                    style: {
+                        'position': 'absolute',
+                        'top'     : '0px',
+                        'left'    : '0px',
+                        'z-index' : '-1'
+                    },
+                    effect: [
+                        new Fade(100),
+                        new Scale({ x_value: [1, 0.7], y_value: [1, 1], z_value: [1, 1] }),
+                    ]
+                });
             }
-            /* setter */
-            if (false === mf.func.isInclude(clr, 'Color')) {
-                throw new Error('invalid parameter');
-            }
-            this.m_color = clr;
-            this.style({ 'border' : '1px solid ' + this.color().getStyle() });
-            mf.func.addHeadConts({
-                tag      : 'style',
-                contents : [ mf.func.getStyleConts(
-                                 '#' + this.styleTgt().getId() + ':before',
-                                 { 'background'  : this.color().getStyle() }
-                             )]
-            });
+            return this.innerComp('band', prm, mf.Component);
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    width (val) {
+    mainColor (prm) {
         try {
-            if (undefined === val) {
-                /* getter */
-                return mf.func.getLength(this.style('min-width'));
+            let ret = this.tgtColor('background', prm);
+            if (undefined !== prm) {
+                this.effect('Style').styleIndex({ 'background' : this.tgtColor('background') }, 3);
             }
-            /* setter */
-            if ('number' === (typeof val)) {
-                this.style({
-                    'min-width' : val + 'px',
-                    'max-width' : val + 'px'
-                });
-            } else if ('string' === (typeof val)) {
-                this.style({
-                    'min-width' : val,
-                    'max-width' : val
-                });
-            } else {
-                throw new Error('invalid parameter');
+            return ret;
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    accentColor (prm) {
+        try {
+            if (undefined === prm) {
+                return this.band().baseColor();
             }
+            this.band().execOption({ baseColor: prm });
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
 }
-mofron.comp.UjarakBtn_init = false;
 module.exports = mofron.comp.UjarakBtn;
+/* end of file */

@@ -35,6 +35,7 @@ mofron.comp.UjarakBtn = class extends Button {
     initDomConts(prm) {
         try {
             super.initDomConts(prm);
+
             this.style({
                 'background': 'none',        // disabled button style
                 'position'  : 'relative'
@@ -53,9 +54,13 @@ mofron.comp.UjarakBtn = class extends Button {
             this.event([ new Hover(hvr_fnc) ]);
             this.effect([
                 new Style({
-                    speed: 150,
-                    style: [null, null, { 'background': 'none' }, { 'background': 'none' }]
-                })
+                    style: { 'background': 'none' }, speed: 150, eid: 2,
+                    tag: this.name() + 'hover-true'
+                }),
+                new Style({
+                    style: { 'background': 'none' }, speed: 150, eid: 3,
+                    tag: this.name() + 'hover-false'
+                }),
             ]);
         } catch (e) {
             console.error(e.stack);
@@ -66,7 +71,7 @@ mofron.comp.UjarakBtn = class extends Button {
     band (prm) {
         try {
             if (undefined !== prm) {
-                prm.execOption({
+                prm.option({
                     visible: false, size: ['100%', '100%'],
                     style: {
                         'position': 'absolute',
@@ -75,8 +80,10 @@ mofron.comp.UjarakBtn = class extends Button {
                         'z-index' : '-1'
                     },
                     effect: [
-                        new Fade(100),
-                        new Scale({ x_value: [1, 0.7], y_value: [1, 1], z_value: [1, 1] }),
+                        new Fade({ value: true, speed: 100 }),
+                        new Fade({ value: false, speed: 100, eid: 1 }),
+                        new Scale({ value: [1, 1, 1],   eid: 0 }),
+                        new Scale({ value: [0.7, 1, 1], eid: 1 })
                     ]
                 });
             }
@@ -91,7 +98,9 @@ mofron.comp.UjarakBtn = class extends Button {
         try {
             let ret = this.tgtColor('background', prm);
             if (undefined !== prm) {
-                this.effect('Style').styleIndex({ 'background' : this.tgtColor('background') }, 3);
+                this.effect(['Style', this.name() + 'hover-true']).style({
+                    'background' : this.tgtColor('background')
+                });
             }
             return ret;
         } catch (e) {
@@ -105,7 +114,7 @@ mofron.comp.UjarakBtn = class extends Button {
             if (undefined === prm) {
                 return this.band().baseColor();
             }
-            this.band().execOption({ baseColor: prm });
+            this.band().option({ baseColor: prm });
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -113,4 +122,3 @@ mofron.comp.UjarakBtn = class extends Button {
     }
 }
 module.exports = mofron.comp.UjarakBtn;
-/* end of file */

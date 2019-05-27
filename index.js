@@ -8,6 +8,7 @@ const Hover  = require('mofron-event-hover');
 const Fade   = require('mofron-effect-fade');
 const Scale  = require('mofron-effect-scale');
 const Style  = require('mofron-effect-style');
+const Border = require('mofron-effect-border');
 
 /**
  * @class mofron.comp.button.Ujarak
@@ -61,7 +62,23 @@ mofron.comp.UjarakBtn = class extends Button {
                     style: { 'background': 'none' }, speed: 150, eid: 3,
                     tag: this.name() + 'hover-false'
                 }),
+                new Border({ color: [120,120,120] })
             ]);
+        } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    text (prm) {
+        try {
+            if (true === mf.func.isInclude(prm, "Text")) {
+                prm.style({
+                    'position' : 'relative',
+                    'z-index'  : '1'
+                });
+            }
+            return super.text(prm);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -77,7 +94,6 @@ mofron.comp.UjarakBtn = class extends Button {
                         'position': 'absolute',
                         'top'     : '0px',
                         'left'    : '0px',
-                        'z-index' : '-1'
                     },
                     effect: [
                         new Fade({ value: true, speed: 100 }),

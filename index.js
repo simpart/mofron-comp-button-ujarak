@@ -7,10 +7,7 @@
  */
 const Button  = require('mofron-comp-button');
 const Hover   = require('mofron-event-hover');
-const Fade    = require('mofron-effect-fade');
-const Scale   = require('mofron-effect-scale');
 const Style   = require('mofron-effect-style');
-const Border  = require('mofron-effect-border');
 const comutl  = mofron.util.common;
 const ConfArg = mofron.class.ConfArg;
 
@@ -19,7 +16,7 @@ module.exports = class extends Button {
      * initialize component
      *
      * @param (mixed) string: button text contents
-     *                    dict: button component config
+     *                dict: button component config
      * @type private
      */
     constructor (p1) {
@@ -55,27 +52,27 @@ module.exports = class extends Button {
             
 	    let bef = {
                 "-webkit-transition-timing-function": "cubic-bezier(0.2, 1, 0.3, 1)",
-		"transition-timing-function": "cubic-bezier(0.2, 1, 0.3, 1)",
-                "content": '""',
-	        "position": "absolute",
-                "top": "0",
-                "left": "0",
-                "width": "100%",
-                "height": "100%",
-                "background": "#37474f",
-                "z-index": "-1",
-                "opacity": "0",
-                "-webkit-transform": "scale3d(0.7, 1, 1)",
-                "transform": "scale3d(0.7, 1, 1)",
+		"transition-timing-function":         "cubic-bezier(0.2, 1, 0.3, 1)",
+                "content":            '""',
+	        "position":           "absolute",
+                "top":                "0",
+                "left":               "0",
+                "width":              "100%",
+                "height":             "100%",
+                "background":         "#37474f",
+                "z-index":            "-1",
+                "opacity":            "0",
+                "-webkit-transform":  "scale3d(0.7, 1, 1)",
+                "transform":          "scale3d(0.7, 1, 1)",
                 "-webkit-transition": "-webkit-transform 0.4s, opacity 0.4s",
-                "transition": "transform 0.4s, opacity 0.4s",
+                "transition":         "transform 0.4s, opacity 0.4s",
                 "-webkit-transition-timing-function": "cubic-bezier(0.2, 1, 0.3, 1)",
-                "transition-timing-function": "cubic-bezier(0.2, 1, 0.3, 1)"
+                "transition-timing-function":         "cubic-bezier(0.2, 1, 0.3, 1)"
 	    };
 	    let hovbef = {
-                "opacity": "1",
+                "opacity":           "1",
                 "-webkit-transform": "translate3d(0, 0, 0)",
-                "transform": "translate3d(0, 0, 0)"
+                "transform":         "translate3d(0, 0, 0)"
 	    }
 
             let addstyle = comutl.obj2style("#" + this.rootDom()[0].id() + "::before", bef) + "\n";
@@ -152,25 +149,18 @@ module.exports = class extends Button {
         }
     }
 
-    baseColor (prm) {
-        try {
-	} catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
     /**
      * hover base color setter/getter
      * 
      * @param (mixed (color)) string: hover color name, #hex
      *                        array: [red, green, blue, (alpha)]
      *                        undefined: calla as getter
+     * @param (dict) style option
      * @return (mixed) hover color
      *                 null: not set yet
      * @type parameter
      */
-    accentColor (prm) {
+    baseColor (prm) {
         try {
 	    let bef = { "background" : prm };
             let addstyle = comutl.obj2style("#" + this.rootDom()[0].id() + "::before", bef) + "\n";

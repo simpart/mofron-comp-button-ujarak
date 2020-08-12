@@ -24,7 +24,8 @@ npm install mofron mofron-comp-button-ujarak
 | | | | array: [red, green, blue, (alpha)] |
 | | | | undefined: calla as getter |
 | | | dict | style option |
-| | accentColor | mixed (color) | string: hover color name, #hex |
+| | baseColor | mixed (color) | string: hover color name, #hex |
 | | | | array: [red, green, blue, (alpha)] |
 | | | | undefined: calla as getter |
+| | | dict | style option |
 

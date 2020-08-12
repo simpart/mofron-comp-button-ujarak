@@ -1,6 +1,6 @@
 {
-  "name": "mofron-comp-ujarakbtn",
-  "version": "0.7.2",
+  "name": "mofron-comp-ujarak",
+  "version": "0.7.3",
   "description": "expansion button component for mofron",
   "main": "index.js",
   "scripts": {
@@ -9,8 +9,6 @@
   "dependencies": {
     "mofron-comp-button" : "",
     "mofron-event-hover" : "",
-    "mofron-effect-fade" : "",
-    "mofron-effect-scale" : "",
     "mofron-effect-style" : ""
   },
   "repository": {

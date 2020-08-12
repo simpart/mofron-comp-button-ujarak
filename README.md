@@ -13,6 +13,17 @@ this source based on the codrops: https://github.com/codrops/ButtonStylesInspira
 npm install mofron mofron-comp-button-ujarak
 ```
 
+# Sample
+```html
+<setting>
+    <tag load="mofron-comp-ujarak">Button</tag>
+</setting>
+
+<Button size=(2rem,0.5rem) color=("#787878","#f0e6fa","#af6cf2")>
+    <text>Test</text>
+</Button>
+```
+
 # Parameter
 
 | Short<br>Form | Parameter Name | Type | Description |

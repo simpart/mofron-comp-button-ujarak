@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-ujarak",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "expansion button component for mofron",
   "main": "index.js",
   "scripts": {
@@ -13,17 +13,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/simpart/mofron-comp-ujarakbtn.git"
+    "url": "git+https://github.com/simpart/mofron-comp-ujarak.git"
   },
   "keywords": [
-    "front-end"
+    "front-end","mofron"
   ],
   "author": "simparts",
   "license": "SEE LICENSE IN LINK",
   "bugs": {
-    "url": "https://github.com/simpart/mofron-comp-ujarakbtn/issues"
+    "url": "https://github.com/simpart/mofron-comp-ujarak/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-comp-ujarakbtn#readme",
+  "homepage": "https://github.com/simpart/mofron-comp-ujarak#readme",
   "devDependencies": {
   }
 }

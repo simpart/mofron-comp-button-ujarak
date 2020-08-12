@@ -22,7 +22,7 @@ module.exports = class extends Button {
     constructor (p1) {
         try {
             super();
-            this.name('UjarakBtn');
+            this.name('Ujarak');
             
 	    if (0 < arguments.length) {
                 this.config(p1);

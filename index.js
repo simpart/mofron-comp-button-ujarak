@@ -1,8 +1,7 @@
 /**
- * @file mofron-comp-button-ujarak/index.js
+ * @file mofron-comp-ujarak/index.js
  * @brief ujarak button component for mofron
  *        this source based on the codrops: https://github.com/codrops/ButtonStylesInspiration
- * @attention this component doesn't support baseColor function.
  * @license MIT
  */
 const Button  = require('mofron-comp-button');

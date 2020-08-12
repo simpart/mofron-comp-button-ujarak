@@ -1,16 +1,14 @@
-# mofron-comp-button-ujarak
+# mofron-comp-ujarak
 [mofron](https://mofron.github.io/mofron/) is module based frontend framework.
 
 ujarak button component for mofron
 
 this source based on the codrops: https://github.com/codrops/ButtonStylesInspiration
 
-## Attention
- - this component doesn't support baseColor function.
 
 # Install
 ```
-npm install mofron mofron-comp-button-ujarak
+npm install mofron mofron-comp-ujarak
 ```
 
 # Sample

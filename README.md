@@ -29,6 +29,9 @@ npm install mofron mofron-comp-ujarak
 | | text | mixed | string: button text contents |
 | | | | mofron-comp-text: button text component |
 | | | | undefined: call as getter |
+| | invert | boolean | true: invert text color when cursor is overed on button |
+| | | | false: not invert |
+| | | | undefined: call as getter |
 | | mainColor | mixed (color) | string: button text color name, #hex |
 | | | | array: [red, green, blue, (alpha)] |
 | | | | undefined: calla as getter |

@@ -21,7 +21,9 @@ module.exports = class extends Button {
     constructor (p1) {
         try {
             super();
-            this.name('Ujarak');
+            this.modname('Ujarak');
+            this.confmng().add("base-color-buf", { type: "Color" });
+            this.confmng().add("invert", { type: "boolean" });
             
 	    if (0 < arguments.length) {
                 this.config(p1);
@@ -40,6 +42,7 @@ module.exports = class extends Button {
     initDomConts() {
         try {
             super.initDomConts();
+            this.style({ "z-index" : "999" });
 
             this.style({
                 'background': 'none',        // disabled button style
@@ -81,13 +84,20 @@ module.exports = class extends Button {
 	    let ujrk = this;
             let invert = (h1,h2) => {
                 try {
-		    let eid = null;
-		    if (true === h2) {
-                        eid = 2;
-		    } else {
-		        eid = 3;
-                    }
-		    ujrk.text().execEffect(eid);
+		    let chk_clr = ujrk.baseColor();
+		    if (false === ujrk.invert()) {
+                        return;
+		    } else if (null === chk_clr) {
+		        return;
+		    } else if (true !== ujrk.invert()) {
+                        let rgb = chk_clr.rgb();
+			let rgb_sum = rgb[0] + rgb[1] + rgb[2];
+			if (450 <= rgb_sum) {
+                            return;
+			}
+		    }
+		    /* execute invert */
+		    ujrk.text().execEffect((true === h2) ? 2 : 3);
 		} catch (e) {
                     console.error(e.stack);
                     throw e;
@@ -120,6 +130,24 @@ module.exports = class extends Button {
             }
             return super.text(prm);
         } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+    
+    /**
+     * invert flag for button text
+     * 
+     * @param (boolean) true: invert text color when cursor is overed on button
+     *                  false: not invert
+     *                  undefined: call as getter
+     * @return (boolean) invert flag
+     * @type parameter
+     */
+    invert (prm) {
+        try {
+            return this.confmng("invert", prm);
+	} catch (e) {
             console.error(e.stack);
             throw e;
         }
@@ -161,7 +189,13 @@ module.exports = class extends Button {
      */
     baseColor (prm) {
         try {
-	    let bef = { "background" : prm };
+	    if (undefined === prm) {
+                return this.confmng("base-color-buf");
+	    }
+	    let clr = comutl.getcolor(prm);
+            this.confmng("base-color-buf", clr);
+
+	    let bef = { "background" : clr.toString() };
             let addstyle = comutl.obj2style("#" + this.rootDom()[0].id() + "::before", bef) + "\n";
             comutl.addhead("style", {id: this.id() + "_basecolor"}, addstyle);
         } catch (e) {

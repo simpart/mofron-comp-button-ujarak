@@ -42,7 +42,7 @@ module.exports = class extends Button {
     initDomConts() {
         try {
             super.initDomConts();
-            this.style({ "z-index" : "999" });
+            this.style({ "z-index" : "100" });
 
             this.style({
                 'background': 'none',        // disabled button style
@@ -61,7 +61,6 @@ module.exports = class extends Button {
                 "left":               "0",
                 "width":              "100%",
                 "height":             "100%",
-                "background":         "#37474f",
                 "z-index":            "-1",
                 "opacity":            "0",
                 "-webkit-transform":  "scale3d(0.7, 1, 1)",
@@ -81,34 +80,19 @@ module.exports = class extends Button {
 	    addstyle += comutl.obj2style("#" + this.rootDom()[0].id() + ":hover::before", hovbef) + "\n";
 	    comutl.addhead("style", {id: this.id() + "_style"}, addstyle);
             
-	    let ujrk = this;
-            let invert = (h1,h2) => {
-                try {
-		    let chk_clr = ujrk.baseColor();
-		    if (false === ujrk.invert()) {
-                        return;
-		    } else if (null === chk_clr) {
-		        return;
-		    } else if (true !== ujrk.invert()) {
-                        let rgb = chk_clr.rgb();
-			let rgb_sum = rgb[0] + rgb[1] + rgb[2];
-			if (450 <= rgb_sum) {
-                            return;
-			}
-		    }
-		    /* execute invert */
-		    ujrk.text().execEffect((true === h2) ? 2 : 3);
-		} catch (e) {
-                    console.error(e.stack);
-                    throw e;
-		}
-	    }
-	    this.text().effect([
-	        new Style({ "style" : { "color" : "rgb(255,255,255)" }, eid:2, speed:400 }),
-		new Style({ "style" : { "color" : null }, eid:3, speed:400 }),
-            ]);
-	    this.text().event(new Hover(invert));
+            this.baseColor("#37474f",{ private:true });
         } catch (e) {
+            console.error(e.stack);
+            throw e;
+        }
+    }
+
+    beforeRender () {
+        try {
+	    this.text().effect(
+	        new Style({ "style" : { "color" : this.text().mainColor() }, eid:3, speed:400 })
+            );
+	} catch (e) {
             console.error(e.stack);
             throw e;
         }
@@ -127,6 +111,31 @@ module.exports = class extends Button {
         try {
             if (true === comutl.isinc(prm, "Text")) {
                 prm.style({ 'position': 'relative', 'z-index': '1' });
+                let invert = (h1,h2,h3) => {
+                    try {
+                        let chk_clr = h3.baseColor();
+                        if (false === h3.invert()) {
+                            return;
+                        } else if (null === chk_clr) {
+                            return;
+                        } else if (true !== h3.invert()) {
+                            let rgb = chk_clr.rgb();
+                            let rgb_sum = rgb[0] + rgb[1] + rgb[2];
+                            if (450 <= rgb_sum) {
+                                return;
+                            }
+                        }
+                        /* execute invert */
+                        h3.text().execEffect((true === h2) ? 2 : 3);
+                    } catch (e) {
+                        console.error(e.stack);
+                        throw e;
+                    }
+                }
+                prm.event(new Hover(new ConfArg(invert,this)));
+                prm.effect(
+                    new Style({ "style" : { "color" : "rgb(255,255,255)" }, eid:2, speed:400 }),
+                );
             }
             return super.text(prm);
         } catch (e) {
@@ -140,7 +149,6 @@ module.exports = class extends Button {
      * 
      * @param (boolean) true: invert text color when cursor is overed on button
      *                  false: not invert
-     *                  undefined: call as getter
      * @return (boolean) invert flag
      * @type parameter
      */
@@ -166,9 +174,10 @@ module.exports = class extends Button {
      */
     mainColor (prm,opt) {
         try {
-	    this.text().effect({ name: "Style", eid: 3 }).style({
-	        "color" : comutl.getcolor(prm).toString()
-            });
+	    let eff_sty = this.text().effect({ modname: "Style", eid: 3 });
+	    if (null !== eff_sty) {
+	        eff_sty.style({ "color" : comutl.getcolor(prm).toString() });
+            }
 	    return this.text().mainColor(prm,opt);
         } catch (e) {
             console.error(e.stack);

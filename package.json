@@ -1,6 +1,6 @@
 {
   "name": "mofron-comp-ujarak",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "expansion button component for mofron",
   "main": "index.js",
   "scripts": {

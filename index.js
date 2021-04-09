@@ -23,7 +23,7 @@ module.exports = class extends Button {
             super();
             this.modname('Ujarak');
             this.confmng().add("base-color-buf", { type: "Color" });
-            this.confmng().add("invert", { type: "boolean" });
+            this.confmng().add("invert", { type: "boolean", init: true });
             
 	    if (0 < arguments.length) {
                 this.config(p1);
@@ -80,7 +80,7 @@ module.exports = class extends Button {
 	    addstyle += comutl.obj2style("#" + this.rootDom()[0].id() + ":hover::before", hovbef) + "\n";
 	    comutl.addhead("style", {id: this.id() + "_style"}, addstyle);
             
-            this.baseColor("#37474f",{ private:true });
+            this.accentColor("#37474f",{ private:true });
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -196,7 +196,7 @@ module.exports = class extends Button {
      *                 null: not set yet
      * @type parameter
      */
-    baseColor (prm) {
+    accentColor (prm) {
         try {
 	    if (undefined === prm) {
                 return this.confmng("base-color-buf");
